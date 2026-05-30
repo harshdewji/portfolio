@@ -1,4 +1,4 @@
-import { GraduationCap, Award, Settings, User } from 'lucide-react';
+import { GraduationCap, Award } from 'lucide-react';
 
 export default function About() {
   return (

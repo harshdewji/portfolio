@@ -1,4 +1,4 @@
-import { ArrowRight, Code, MessageSquare } from 'lucide-react';
+import { Code, MessageSquare } from 'lucide-react';
 
 export default function Hero() {
   const handleScrollTo = (id) => {
