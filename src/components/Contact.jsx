@@ -248,7 +248,7 @@ export default function Contact() {
                   gap: '10px', 
                   height: '48px',
                   background: submitStatus === 'success' ? '#10b981' : submitStatus === 'error' ? '#ef4444' : 'var(--grad-cyan-blue)',
-                  color: submitStatus === 'success' || submitStatus === 'error' ? '#fff' : '#030712',
+                  color: submitStatus === 'success' || submitStatus === 'error' ? '#fff' : 'var(--btn-primary-text)',
                   boxShadow: submitStatus === 'success' ? '0 0 15px rgba(16, 185, 129, 0.3)' : submitStatus === 'error' ? '0 0 15px rgba(239, 68, 68, 0.3)' : 'var(--primary-glow)',
                   borderColor: 'transparent'
                 }}

@@ -1,10 +1,22 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Sun, Moon } from 'lucide-react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'light';
+  });
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.body.classList.add('dark-theme');
+    } else {
+      document.body.classList.remove('dark-theme');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,7 +65,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar" style={{ background: scrolled ? 'rgba(6, 9, 19, 0.85)' : 'rgba(6, 9, 19, 0.6)' }}>
+    <nav className="navbar" style={{ background: scrolled ? 'var(--bg-navbar-scrolled)' : 'var(--bg-navbar)' }}>
       <div className="container nav-container">
         <a href="#home" onClick={(e) => { e.preventDefault(); handleLinkClick('home'); }} className="logo">
           HARSH<span className="gradient-text">.</span>
@@ -71,6 +83,35 @@ export default function Navbar() {
               {link.name}
             </a>
           ))}
+          <button
+            onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+            className="theme-toggle-btn"
+            aria-label="Toggle Theme"
+            style={{
+              background: 'transparent',
+              border: '1px solid var(--border-glass-hover)',
+              borderRadius: '8px',
+              width: '38px',
+              height: '38px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'var(--text-primary)',
+              cursor: 'pointer',
+              transition: 'all 0.2s',
+              marginRight: '8px'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--bg-card-hover)';
+              e.currentTarget.style.borderColor = 'var(--text-primary)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent';
+              e.currentTarget.style.borderColor = 'var(--border-glass-hover)';
+            }}
+          >
+            {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+          </button>
           <a
             href="#contact"
             onClick={(e) => { e.preventDefault(); handleLinkClick('contact'); }}
@@ -105,14 +146,45 @@ export default function Navbar() {
               {link.name}
             </a>
           ))}
-          <a
-            href="#contact"
-            onClick={(e) => { e.preventDefault(); handleLinkClick('contact'); }}
-            className="btn btn-primary"
-            style={{ padding: '12px 24px', width: '100%', marginTop: '10px' }}
-          >
-            Hire Me <ArrowUpRight size={18} />
-          </a>
+          <div style={{ display: 'flex', gap: '10px', marginTop: '10px', width: '100%' }}>
+            <button
+              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+              className="theme-toggle-btn"
+              aria-label="Toggle Theme"
+              style={{
+                background: 'transparent',
+                border: '1px solid var(--border-glass-hover)',
+                borderRadius: '8px',
+                width: '48px',
+                height: '48px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--text-primary)',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                flexShrink: 0
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'var(--bg-card-hover)';
+                e.currentTarget.style.borderColor = 'var(--text-primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.borderColor = 'var(--border-glass-hover)';
+              }}
+            >
+              {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+            </button>
+            <a
+              href="#contact"
+              onClick={(e) => { e.preventDefault(); handleLinkClick('contact'); }}
+              className="btn btn-primary"
+              style={{ padding: '12px 24px', flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+            >
+              Hire Me <ArrowUpRight size={18} style={{ marginLeft: '6px' }} />
+            </a>
+          </div>
         </div>
       )}
     </nav>

@@ -68,7 +68,7 @@ export default function Projects() {
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="project-link"
-                  style={{ color: '#00F2FE' }}
+                  style={{ color: 'var(--accent-cyan)' }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +101,7 @@ export default function Projects() {
           style={{
             position: 'fixed',
             inset: 0,
-            background: 'rgba(3, 7, 18, 0.85)',
+            background: 'var(--bg-modal-overlay)',
             backdropFilter: 'blur(8px)',
             WebkitBackdropFilter: 'blur(8px)',
             display: 'flex',
@@ -121,7 +121,7 @@ export default function Projects() {
               overflowY: 'auto',
               padding: '36px',
               position: 'relative',
-              boxShadow: '0 20px 50px rgba(0,0,0,0.7), 0 0 30px rgba(0, 242, 254, 0.15)',
+              boxShadow: 'var(--shadow-glass-hover), var(--primary-glow)',
               transform: 'none', // Override default glass panel translate hover
             }}
           >
@@ -132,8 +132,8 @@ export default function Projects() {
                 position: 'absolute',
                 top: '20px',
                 right: '20px',
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.08)',
+                background: 'var(--bg-card)',
+                border: '1px solid var(--border-glass)',
                 color: 'var(--text-secondary)',
                 borderRadius: '8px',
                 width: '36px',
@@ -145,19 +145,21 @@ export default function Projects() {
                 transition: 'all 0.2s'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.color = '#fff';
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';
+                e.currentTarget.style.color = 'var(--text-primary)';
+                e.currentTarget.style.borderColor = 'var(--border-glass-hover)';
+                e.currentTarget.style.background = 'var(--bg-card-hover)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.color = 'var(--text-secondary)';
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+                e.currentTarget.style.borderColor = 'var(--border-glass)';
+                e.currentTarget.style.background = 'var(--bg-card)';
               }}
             >
               <X size={20} />
             </button>
 
             {/* Modal Title */}
-            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '28px', color: '#fff', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '28px', color: 'var(--text-modal-title)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '12px' }}>
               {getProjectIcon(selectedProject.id)}
               {selectedProject.title} Documentation
             </h3>
@@ -167,7 +169,7 @@ export default function Projects() {
 
             {/* Overview */}
             <div style={{ marginBottom: '28px' }}>
-              <h4 style={{ color: '#fff', marginBottom: '8px', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <h4 style={{ color: 'var(--text-modal-title)', marginBottom: '8px', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <FileText size={16} style={{ color: 'var(--accent-cyan)' }} /> Overview
               </h4>
               <p style={{ color: 'var(--text-secondary)', fontSize: '14.5px', lineHeight: '1.6' }}>{selectedProject.doc.overview}</p>
@@ -175,7 +177,7 @@ export default function Projects() {
 
             {/* Architecture */}
             <div style={{ marginBottom: '28px' }}>
-              <h4 style={{ color: '#fff', marginBottom: '8px', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <h4 style={{ color: 'var(--text-modal-title)', marginBottom: '8px', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Cpu size={16} style={{ color: 'var(--accent-purple)' }} /> System Architecture
               </h4>
               <p style={{ color: 'var(--text-secondary)', fontSize: '14.5px', lineHeight: '1.6' }}>{selectedProject.doc.architecture}</p>
@@ -183,16 +185,16 @@ export default function Projects() {
 
             {/* Database Schema */}
             <div style={{ marginBottom: '28px' }}>
-              <h4 style={{ color: '#fff', marginBottom: '12px', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <h4 style={{ color: 'var(--text-modal-title)', marginBottom: '12px', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Database size={16} style={{ color: 'var(--accent-cyan)' }} /> Database Model Design
               </h4>
               <pre 
                 style={{
-                  background: 'rgba(3, 7, 18, 0.6)',
-                  border: '1px solid rgba(255,255,255,0.06)',
+                  background: 'var(--bg-code)',
+                  border: '1px solid var(--border-code)',
                   borderRadius: '10px',
                   padding: '18px',
-                  color: '#9cdcfe',
+                  color: 'var(--text-code)',
                   fontSize: '13px',
                   fontFamily: 'Consolas, monospace',
                   overflowX: 'auto',
@@ -205,16 +207,16 @@ export default function Projects() {
 
             {/* API Endpoints */}
             <div style={{ marginBottom: '28px' }}>
-              <h4 style={{ color: '#fff', marginBottom: '12px', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <h4 style={{ color: 'var(--text-modal-title)', marginBottom: '12px', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Cpu size={16} style={{ color: 'var(--accent-purple)' }} /> Core REST API Routing
               </h4>
-              <div style={{ overflowX: 'auto', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
+              <div style={{ overflowX: 'auto', borderRadius: '10px', border: '1px solid var(--border-table)' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13.5px', textAlign: 'left' }}>
                   <thead>
-                    <tr style={{ background: 'rgba(255,255,255,0.02)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-                      <th style={{ padding: '12px 16px', color: '#fff', fontWeight: '600' }}>Method</th>
-                      <th style={{ padding: '12px 16px', color: '#fff', fontWeight: '600' }}>Endpoint Route</th>
-                      <th style={{ padding: '12px 16px', color: '#fff', fontWeight: '600' }}>Description</th>
+                    <tr style={{ background: 'var(--bg-table-header)', borderBottom: '1px solid var(--border-table)' }}>
+                      <th style={{ padding: '12px 16px', color: 'var(--text-primary)', fontWeight: '600' }}>Method</th>
+                      <th style={{ padding: '12px 16px', color: 'var(--text-primary)', fontWeight: '600' }}>Endpoint Route</th>
+                      <th style={{ padding: '12px 16px', color: 'var(--text-primary)', fontWeight: '600' }}>Description</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -222,8 +224,8 @@ export default function Projects() {
                       <tr 
                         key={apiIndex} 
                         style={{ 
-                          borderBottom: apiIndex === selectedProject.doc.apiEndpoints.length - 1 ? 'none' : '1px solid rgba(255,255,255,0.04)',
-                          background: 'rgba(255,255,255,0.005)'
+                          borderBottom: apiIndex === selectedProject.doc.apiEndpoints.length - 1 ? 'none' : '1px solid var(--border-table-row)',
+                          background: 'transparent'
                         }}
                       >
                         <td style={{ padding: '12px 16px' }}>
@@ -234,9 +236,9 @@ export default function Projects() {
                               borderRadius: '4px',
                               fontSize: '11px',
                               fontWeight: '700',
-                              background: endpoint.method === 'GET' ? 'rgba(59, 130, 246, 0.15)' : 'rgba(249, 115, 22, 0.15)',
-                              color: endpoint.method === 'GET' ? '#60a5fa' : '#f97316',
-                              border: endpoint.method === 'GET' ? '1px solid rgba(59, 130, 246, 0.3)' : '1px solid rgba(249, 115, 22, 0.3)'
+                              background: endpoint.method === 'GET' ? 'rgba(37, 99, 235, 0.1)' : 'rgba(234, 88, 12, 0.1)',
+                              color: endpoint.method === 'GET' ? 'var(--accent-blue)' : 'var(--accent-sunset)',
+                              border: endpoint.method === 'GET' ? '1px solid rgba(37, 99, 235, 0.25)' : '1px solid rgba(234, 88, 12, 0.25)'
                             }}
                           >
                             {endpoint.method}
@@ -257,7 +259,7 @@ export default function Projects() {
 
             {/* Local Installation */}
             <div>
-              <h4 style={{ color: '#fff', marginBottom: '12px', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <h4 style={{ color: 'var(--text-modal-title)', marginBottom: '12px', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Terminal size={16} style={{ color: 'var(--accent-cyan)' }} /> Local Development & Setup
               </h4>
               <ol style={{ paddingLeft: '20px', color: 'var(--text-secondary)', fontSize: '14.5px', lineHeight: '1.7' }}>
@@ -267,7 +269,7 @@ export default function Projects() {
                       <span>
                         {step.split(/(`[^`]+`)/g).map((part, pIdx) => {
                           if (part.startsWith('`') && part.endsWith('`')) {
-                            return <code key={pIdx} style={{ background: 'rgba(255,255,255,0.04)', padding: '2px 6px', borderRadius: '4px', color: 'var(--accent-cyan)', fontFamily: 'Consolas, monospace' }}>{part.slice(1, -1)}</code>;
+                            return <code key={pIdx} style={{ background: 'var(--bg-code)', border: '1px solid var(--border-code)', padding: '2px 6px', borderRadius: '4px', color: 'var(--accent-cyan)', fontFamily: 'Consolas, monospace' }}>{part.slice(1, -1)}</code>;
                           }
                           return part;
                         })}
