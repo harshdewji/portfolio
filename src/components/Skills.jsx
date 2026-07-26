@@ -1,4 +1,4 @@
-import { Layout, Server, Terminal } from 'lucide-react';
+import { Layout, Server, Terminal, Database } from 'lucide-react';
 
 export default function Skills() {
   const skillCategories = [
@@ -39,8 +39,20 @@ export default function Skills() {
         'VS Code',
         'Java'
       ]
+    },
+    {
+      title: 'Data & Domain Expertise',
+      icon: <Database size={24} style={{ color: '#10B981' }} />,
+      skills: [
+        'Data Annotation',
+        'Machine Learning',
+        'Computer Vision',
+        'Data Operations',
+        'Quality Assurance'
+      ]
     }
   ];
+
 
   return (
     <section id="skills">

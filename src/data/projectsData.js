@@ -3,50 +3,105 @@
 
 export const projectsData = [
   {
-    id: 'chat-app',
-    title: 'Real-Time Chat Application',
-    description: 'A modern instant messaging application built to provide seamless, low-latency communication between users.',
+    id: 'expense-tracker',
+    title: 'Expense Tracker System',
+    description: 'A comprehensive full-stack financial management platform for tracking income, managing expenses, and visualizing financial analytics.',
     bullets: [
-      'Developed real-time chat functionality using WebSockets (Socket.IO) for instant message delivery.',
-      'Designed interactive user status metrics, including live online/offline presence and typing indicators.',
-      'Implemented secure user authentication with JWT and optimized file upload pipelines for image sharing.'
+      'Built multi-wallet management with interactive tracking for cash, bank, and digital accounts.',
+      'Designed analytics dashboards featuring interactive data charts for expense categorizations and monthly budget tracking.',
+      'Implemented automated document scanning/OCR parsing for invoice processing and recurring transaction schedules.'
     ],
-    tech: ['React.js', 'Node.js', 'Socket.IO', 'Neon DB', 'Express.js', 'JWT'],
-    github: 'https://github.com/harshdewji',
+    tech: ['React.js', 'Node.js', 'Express.js', 'PostgreSQL', 'Prisma', 'Chart.js', 'JWT'],
+    github: 'https://github.com/harshdewji/expense-tracker',
     live: 'https://harshbuilds-theta.vercel.app/',
     doc: {
-      overview: 'This project implements a fully responsive real-time chat application with instant message updates, typing indicators, user online states, and image sharing. The codebase is optimized for production-grade WebSocket pooling.',
-      architecture: 'Client-Server architecture. The frontend is built as a single-page React app that initiates WebSocket connections to an Express server. Messages are stored persistently in Neon PostgreSQL, and media file uploads are integrated directly with Cloudinary API.',
+      overview: 'A production-ready Fintech Expense Tracker platform allowing users to log daily expenses, monitor wallet balances, scan receipts with OCR capabilities, and analyze spending patterns with real-time charts.',
+      architecture: 'Full-Stack architecture. React (Vite) client interfacing with a Node.js Express REST API backend using Prisma ORM with PostgreSQL database.',
       dbSchema: `Table Users {
   id serial [pk]
-  username varchar(50) [not null]
+  name varchar(100) [not null]
   email varchar(100) [unique, not null]
   password_hash varchar(255) [not null]
-  status varchar(15) // 'online', 'offline'
-  avatar_url varchar(255)
   created_at timestamp [default: now()]
 }
 
-Table Messages {
+Table Wallets {
   id serial [pk]
-  sender_id integer [ref: > Users.id, not null]
-  receiver_id integer [ref: > Users.id, not null]
-  content text [not null]
-  image_url varchar(255)
-  is_read boolean [default: false]
-  created_at timestamp [default: now()]
+  user_id integer [ref: > Users.id, not null]
+  name varchar(50) [not null]
+  balance numeric(12,2) [default: 0.00]
+  type varchar(20) // 'Cash', 'Bank', 'Credit'
+}
+
+Table Transactions {
+  id serial [pk]
+  wallet_id integer [ref: > Wallets.id, not null]
+  type varchar(10) // 'income', 'expense'
+  category varchar(50) [not null]
+  amount numeric(12,2) [not null]
+  description text
+  date timestamp [default: now()]
 }`,
       apiEndpoints: [
-        { method: 'POST', path: '/api/auth/register', desc: 'Registers a new user profile' },
-        { method: 'POST', path: '/api/auth/login', desc: 'Authenticates user credentials and returns JWT' },
-        { method: 'GET', path: '/api/users/contacts', desc: 'Retrieve contacts list with active online/offline status' },
-        { method: 'POST', path: '/api/media/upload', desc: 'Uploads images to Cloudinary for real-time messaging' }
+        { method: 'GET', path: '/api/transactions', desc: 'Fetches filtered transactions for the user' },
+        { method: 'POST', path: '/api/transactions/create', desc: 'Logs a new income or expense entry' },
+        { method: 'GET', path: '/api/wallets', desc: 'Fetches wallet balance breakdown' },
+        { method: 'POST', path: '/api/ocr/scan', desc: 'Parses uploaded receipt images to extract bill amounts' }
       ],
       installation: [
-        'git clone https://github.com/harshdewji/realtime-chat',
-        'cd realtime-chat && npm install',
-        'Set up a .env file with PORT, DATABASE_URL (Neon DB), and JWT_SECRET',
-        'npm run dev (starts both client and socket listener server)'
+        'git clone https://github.com/harshdewji/expense-tracker',
+        'cd expense-tracker && npm install',
+        'Configure database credentials in .env and run npx prisma db push',
+        'npm run dev'
+      ]
+    }
+  },
+  {
+    id: 'library-management',
+    title: 'Library Management System',
+    description: 'A modern web application for digital book cataloging, circulation tracking, and library member management.',
+    bullets: [
+      'Developed automated borrowing and returning workflows with fine calculation and due date tracking.',
+      'Implemented real-time book search, category filtering, and ISBN database lookups.',
+      'Designed admin dashboards for inventory management and member activity audit logs.'
+    ],
+    tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS', 'REST API'],
+    github: 'https://github.com/harshdewji/library-management-system',
+    live: 'https://harshbuilds-theta.vercel.app/',
+    doc: {
+      overview: 'A digital platform for libraries to manage book inventories, track issued books, maintain reader profiles, and automate late return penalties.',
+      architecture: 'MERN stack architecture with React frontend interface communicating with Express/Node.js API endpoints backed by MongoDB schemas.',
+      dbSchema: `Collection Books {
+  _id ObjectId [pk]
+  title String [not null]
+  author String [not null]
+  isbn String [unique, not null]
+  category String [not null]
+  available_copies Number [default: 1]
+  total_copies Number [default: 1]
+}
+
+Collection BorrowRecords {
+  _id ObjectId [pk]
+  book_id ObjectId [ref: > Books._id, not null]
+  user_id ObjectId [ref: > Users._id, not null]
+  issue_date Date [default: Date.now]
+  due_date Date [not null]
+  return_date Date
+  fine_amount Number [default: 0]
+  status String [default: 'Borrowed'] // 'Borrowed', 'Returned', 'Overdue'
+}`,
+      apiEndpoints: [
+        { method: 'GET', path: '/api/books', desc: 'Retrieve catalog of books with availability filters' },
+        { method: 'POST', path: '/api/books/borrow', desc: 'Issue a book to a registered library member' },
+        { method: 'POST', path: '/api/books/return', desc: 'Process returned book and compute applicable overdue fines' },
+        { method: 'GET', path: '/api/admin/reports', desc: 'Fetch overall borrowing statistics and overdue alerts' }
+      ],
+      installation: [
+        'git clone https://github.com/harshdewji/library-management',
+        'cd library-management && npm install',
+        'Set MONGODB_URI and PORT in environment settings',
+        'npm run dev'
       ]
     }
   },
@@ -60,7 +115,7 @@ Table Messages {
       'Integrated interactive data analysis widgets displaying real-time task progress and productivity metrics.'
     ],
     tech: ['React.js', 'Node.js', 'MongoDB', 'REST APIs', 'Bootstrap', 'Express.js'],
-    github: 'https://github.com/harshdewji',
+    github: 'https://github.com/harshdewji/erp-management-system',
     live: 'https://harshbuilds-theta.vercel.app/',
     doc: {
       overview: 'An Enterprise Resource Planning (ERP) platform allowing managers to organize employee activities, log work attendance, assign tasks, and monitor departmental performance analytics in real time.',
