@@ -1,4 +1,4 @@
-import { GraduationCap, Award } from 'lucide-react';
+import { GraduationCap, Award, ShieldCheck } from 'lucide-react';
 
 export default function About() {
   return (
@@ -13,7 +13,7 @@ export default function About() {
           {/* Left Text Column */}
           <div className="about-text reveal">
             <p>
-              I am a passionate **Full Stack MERN Developer** skilled in React.js, Node.js, JavaScript, and modern web technologies. I thrive on creating real-time applications, enterprise resource planning (ERP) systems, and scalable web platforms with high emphasis on secure user authentication and fluid, responsive user interfaces.
+              I am a passionate **Full Stack Developer** skilled in React.js, Node.js, JavaScript, and modern web technologies, fortified by comprehensive training in **Java Full Stack development (JSpiders)** and certified **MERN stack architecture (Web Tech Academy)**. I thrive on creating real-time applications, enterprise resource planning (ERP) systems, and scalable web platforms with high emphasis on secure user authentication and fluid, responsive user interfaces.
             </p>
             <p>
               With a strong interest in full-stack architecture, I focus on optimizing real-time communication systems using technologies like **Socket.IO** and designing AI-powered applications that solve real-world problems.
@@ -36,6 +36,15 @@ export default function About() {
 
             <div className="glass-panel stat-card">
               <div style={{ color: '#E100FF', display: 'flex', justifyContent: 'center', marginBottom: '12px' }}>
+                <ShieldCheck size={32} />
+              </div>
+              <h3 className="stat-value">Certified Courses</h3>
+              <p className="stat-label">MERN (Web Tech) & Java (JSpiders)</p>
+              <span className="timeline-date" style={{ marginTop: '8px', display: 'inline-block' }}>Specialized Training</span>
+            </div>
+
+            <div className="glass-panel stat-card">
+              <div style={{ color: '#FFB199', display: 'flex', justifyContent: 'center', marginBottom: '12px' }}>
                 <Award size={32} />
               </div>
               <h3 className="stat-value">7.0 / 10</h3>

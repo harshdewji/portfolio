@@ -14,7 +14,7 @@ export default function Skills() {
         'Framer Motion',
         'AOS',
         'Bootstrap',
-        'Responsive Design'
+        'Responsive Web Design'
       ]
     },
     {
@@ -28,16 +28,27 @@ export default function Skills() {
         'MySQL',
         'Clerk Auth',
         'REST APIs',
-        'Cloudinary'
+        'Cloudinary',
+        'JWT',
+        'Authentication',
+        'Authorization',
+        'CRUD Operation',
+        'State Management',
+        'API Integration',
+        'Deployment',
+        'Debugging'
       ]
     },
     {
       title: 'Tools & Languages',
       icon: <Terminal size={24} style={{ color: '#FFB199' }} />,
       skills: [
+        'Java (Core & Advanced)',
+        'OOPs Concepts',
+        'JDBC',
+        'SQL / MySQL',
         'Git & GitHub',
-        'VS Code',
-        'Java'
+        'VS Code'
       ]
     },
     {

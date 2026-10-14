@@ -34,6 +34,47 @@ export default function Experience() {
     }
   ];
 
+  const certifications = [
+    {
+      title: 'FullStack Web Development (MERN)',
+      issuer: 'Web Tech Academy',
+      recognition: 'Recognized by MSME - Govt. of India',
+      duration: '6 Months Intensive Training',
+      status: 'Verified Certificate',
+      desc: 'Completed an intensive 6-month hands-on certification training in FullStack Web Development (MERN). Mastered React.js frontend engineering, Node.js & Express RESTful API architecture, MongoDB database modeling, authentication & authorization, and full-stack application deployment.',
+      skills: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'REST APIs', 'JWT & Auth', 'CRUD Operations', 'Full-Stack Deployment'],
+      certificate: {
+        title: 'Certificate of Achievement - FullStack Web Development (MERN)',
+        ref: 'MSME / Web Tech Academy',
+        issueDate: 'Certified Completion',
+        period: '6 Months Training Program',
+        issuer: 'Saurabh Jain (Founder)',
+        companyFull: 'Web Tech Academy (Recognized by MSME - Govt. of India)',
+        location: 'Coding Your Future',
+        image: '/webtech-certificate.jpg'
+      }
+    },
+    {
+      title: 'Java Full Stack Development',
+      issuer: 'JSpiders - Java Training and Development Center',
+      recognition: 'Certificate No: JSP-26-2388',
+      duration: 'Professional Course (Granted: 12-10-2026)',
+      status: 'Verified Certificate',
+      desc: 'Successfully completed the professional certification course at JSpiders covering Core Java, Advance Java, SQL database management, and Web Technology with extensive practical implementation.',
+      skills: ['Core Java', 'Advance Java', 'SQL', 'Web Technology', 'OOPs Concepts', 'JDBC', 'Database Management'],
+      certificate: {
+        title: 'Professional Course Certificate - Java Full Stack',
+        ref: 'JSP-26-2388',
+        issueDate: 'October 12, 2026',
+        period: 'Professional Course',
+        issuer: 'Manager (QSpiders / JSpiders)',
+        companyFull: 'JSpiders Java Training and Development Center',
+        location: 'Hyderabad, India',
+        image: '/jspiders-certificate.jpg'
+      }
+    }
+  ];
+
   const educations = [
     {
       role: 'Bachelor of Technology',
@@ -135,6 +176,68 @@ export default function Experience() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* Dedicated Certifications & Specialized Courses Showcase */}
+        <div className="certifications-section reveal">
+          <div className="cert-section-header" style={{ marginBottom: '28px' }}>
+            <h3 className="category-title">
+              <Award size={22} style={{ color: '#FFB199' }} />
+              Certifications & Specialized Courses
+            </h3>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '14px', marginTop: '4px' }}>
+              Specialized technical certifications and intensive professional training programs
+            </p>
+          </div>
+
+          <div className="cert-grid">
+            {certifications.map((cert, index) => (
+              <div key={index} className="glass-panel cert-card">
+                <div>
+                  <div className="cert-card-header">
+                    <div>
+                      <h4 className="cert-course-title">{cert.title}</h4>
+                      <div className="cert-issuer">{cert.issuer}</div>
+                      {cert.recognition && (
+                        <div className="cert-recognition">{cert.recognition}</div>
+                      )}
+                    </div>
+                    <span className={cert.certificate ? "badge-verified" : "badge-cert-course"}>
+                      {cert.certificate ? <ShieldCheck size={13} /> : <Award size={13} />}
+                      {cert.status}
+                    </span>
+                  </div>
+
+                  <span className="timeline-date" style={{ display: 'inline-block', marginBottom: '14px' }}>
+                    {cert.duration}
+                  </span>
+
+                  <p className="timeline-desc">{cert.desc}</p>
+
+                  <div className="timeline-skills">
+                    {cert.skills.map((skill, sIdx) => (
+                      <span key={sIdx} className="timeline-skill-tag">{skill}</span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="timeline-cert-action" style={{ marginTop: '20px' }}>
+                  {cert.certificate ? (
+                    <button 
+                      className="btn btn-outline btn-cert"
+                      onClick={() => setSelectedCert(cert.certificate)}
+                    >
+                      <Award size={16} /> View Certificate <ExternalLink size={14} />
+                    </button>
+                  ) : (
+                    <div className="cert-completed-tag">
+                      <CheckCircle2 size={15} /> Professional Course Completed
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
