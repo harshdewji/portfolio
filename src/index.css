@@ -537,29 +537,112 @@ section:hover .section-title::after {
 /* About Section */
 .about-grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 360px 1fr;
   gap: 48px;
   align-items: center;
 }
 
+@media (max-width: 992px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+.about-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.about-image-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.about-image-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0, 242, 254, 0.4);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35), 0 0 25px rgba(0, 242, 254, 0.2);
+}
+
+.about-portrait {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 14px;
+  display: block;
+}
+
+.about-image-badge {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(10, 15, 30, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 8px 18px;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.badge-dot-live {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+  animation: pulse 2s infinite;
+}
+
+.about-content-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .about-text {
-  font-size: 16px;
+  font-size: 15.5px;
   line-height: 1.75;
   color: var(--text-secondary);
 }
 
 .about-text p {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
-.about-stats {
+.about-stats-row {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .about-stats-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
 }
 
 .stat-card {
-  padding: 24px;
+  padding: 20px 14px;
   text-align: center;
 }
 
@@ -569,16 +652,17 @@ section:hover .section-title::after {
 
 .stat-value {
   font-family: var(--font-heading);
-  font-size: 32px;
+  font-size: 20px;
   font-weight: 700;
   margin-bottom: 4px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .stat-label {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-muted);
   font-weight: 500;
+  line-height: 1.4;
 }
 
 /* Skills Section */
