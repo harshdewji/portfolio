@@ -57,50 +57,59 @@ Table Transactions {
     }
   },
   {
-    id: 'library-management',
-    title: 'Library Management System',
-    description: 'A modern web application for digital book cataloging, circulation tracking, and library member management.',
+    id: 'movie-explorer',
+    title: 'Movie Explorer',
+    description: 'A responsive cinematic discovery platform providing real-time movie search, trending trailers, personalized watchlists, and detailed media metrics.',
     bullets: [
-      'Developed automated borrowing and returning workflows with fine calculation and due date tracking.',
-      'Implemented real-time book search, category filtering, and ISBN database lookups.',
-      'Designed admin dashboards for inventory management and member activity audit logs.'
+      'Engineered an interactive discovery interface consuming TMDB REST APIs for real-time search, genres, and trending releases.',
+      'Implemented user watchlist management and rating systems with persistent state storage.',
+      'Optimized performance using debounced search queries, infinite scroll pagination, and responsive modal views.'
     ],
-    tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS', 'REST API'],
-    github: 'https://github.com/harshdewji/library-management-system',
+    tech: ['React.js', 'Node.js', 'Express.js', 'TMDB API', 'Tailwind CSS', 'REST API'],
+    github: 'https://github.com/harshdewji/movie-explorer',
     live: 'https://harshbuilds-theta.vercel.app/',
     doc: {
-      overview: 'A digital platform for libraries to manage book inventories, track issued books, maintain reader profiles, and automate late return penalties.',
-      architecture: 'MERN stack architecture with React frontend interface communicating with Express/Node.js API endpoints backed by MongoDB schemas.',
-      dbSchema: `Collection Books {
+      overview: 'A feature-packed Movie Explorer web application allowing users to browse trending cinema, search global movie databases, view detailed cast/crew metrics, stream trailers, and manage personalized watchlists.',
+      architecture: 'MERN stack architecture with React (Vite) frontend communicating with an Express/Node.js API proxy and MongoDB for user watchlists, ratings, and review collections.',
+      dbSchema: `Collection Users {
   _id ObjectId [pk]
-  title String [not null]
-  author String [not null]
-  isbn String [unique, not null]
-  category String [not null]
-  available_copies Number [default: 1]
-  total_copies Number [default: 1]
+  username String [unique, not null]
+  email String [unique, not null]
+  password_hash String [not null]
+  avatar_url String
+  created_at Date [default: Date.now]
 }
 
-Collection BorrowRecords {
+Collection Watchlists {
   _id ObjectId [pk]
-  book_id ObjectId [ref: > Books._id, not null]
   user_id ObjectId [ref: > Users._id, not null]
-  issue_date Date [default: Date.now]
-  due_date Date [not null]
-  return_date Date
-  fine_amount Number [default: 0]
-  status String [default: 'Borrowed'] // 'Borrowed', 'Returned', 'Overdue'
+  movie_id String [not null] // TMDB Movie ID
+  title String [not null]
+  poster_path String
+  release_date String
+  vote_average Number
+  status String [default: 'Plan to Watch'] // 'Plan to Watch', 'Watched'
+  added_at Date [default: Date.now]
+}
+
+Collection Reviews {
+  _id ObjectId [pk]
+  user_id ObjectId [ref: > Users._id, not null]
+  movie_id String [not null]
+  rating Number [not null] // 1 - 10 scale
+  review_text String
+  created_at Date [default: Date.now]
 }`,
       apiEndpoints: [
-        { method: 'GET', path: '/api/books', desc: 'Retrieve catalog of books with availability filters' },
-        { method: 'POST', path: '/api/books/borrow', desc: 'Issue a book to a registered library member' },
-        { method: 'POST', path: '/api/books/return', desc: 'Process returned book and compute applicable overdue fines' },
-        { method: 'GET', path: '/api/admin/reports', desc: 'Fetch overall borrowing statistics and overdue alerts' }
+        { method: 'GET', path: '/api/movies/trending', desc: 'Fetches weekly trending movies with backend caching' },
+        { method: 'GET', path: '/api/movies/search?q=:query', desc: 'Searches movies by title or keyword with debouncing' },
+        { method: 'POST', path: '/api/watchlist/add', desc: 'Adds a movie title to the authenticated user\'s watchlist' },
+        { method: 'POST', path: '/api/movies/review', desc: 'Submits user rating and review for a specific movie' }
       ],
       installation: [
-        'git clone https://github.com/harshdewji/library-management',
-        'cd library-management && npm install',
-        'Set MONGODB_URI and PORT in environment settings',
+        'git clone https://github.com/harshdewji/movie-explorer',
+        'cd movie-explorer && npm install',
+        'Configure TMDB_API_KEY, MONGODB_URI, and PORT in .env',
         'npm run dev'
       ]
     }

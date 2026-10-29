@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { projectsData } from '../data/projectsData';
-import { MessageSquare, Briefcase, X, Database, Terminal, FileText, Cpu } from 'lucide-react';
+import { Film, MessageSquare, Briefcase, X, Database, Terminal, FileText, Cpu } from 'lucide-react';
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -19,6 +19,7 @@ export default function Projects() {
   }, [selectedProject]);
 
   const getProjectIcon = (id) => {
+    if (id === 'movie-explorer') return <Film size={24} />;
     if (id === 'chat-app') return <MessageSquare size={24} />;
     return <Briefcase size={24} />;
   };
